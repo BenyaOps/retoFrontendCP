@@ -53,7 +53,7 @@ export const cinemaApi = {
     transactionId: string; 
   }) => {
     // El servicio complete debe retornar un código de respuesta "0" 
-    const response = await api.post<{ responseCode: string }>('/complete', data);
+    const response = await api.post<{ code: string }>('/complete', data);
     return response.data;
   }
 };

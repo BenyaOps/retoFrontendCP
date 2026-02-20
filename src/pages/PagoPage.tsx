@@ -5,7 +5,7 @@ import { PaymentForm } from '@/components/pago/PaymentForm';
 import { payuService, cinemaApi } from '@/api/services';
 import { useCartStore } from '@/store';
 import { PaymentSuccessModal } from '@/components/pago/PaymentSuccessModal';
-import { ItemsVacio } from '@/components/pagos/itemsVacio';
+import { ItemsVacio } from '@/components/pagos/ItemsVacio';
 
 export const PagoPage = () => {
   const [isProcessing, setIsProcessing] = useState(false);

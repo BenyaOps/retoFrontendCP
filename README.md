@@ -1,3 +1,27 @@
+## 🧪 Test
+
+Actualmente el proyecto no incluye pruebas automatizadas, pero puedes agregar tests usando Jest, React Testing Library o Vitest.
+
+Para agregar y ejecutar tests:
+
+1. Instala una librería de testing (ejemplo con Vitest):
+   ```bash
+   npm install --save-dev vitest @testing-library/react @testing-library/jest-dom
+   ```
+2. Crea archivos `*.test.tsx` o `*.spec.tsx` en la carpeta `src/`.
+3. Agrega un script en `package.json`:
+   ```json
+   "scripts": {
+     ...
+     "test": "vitest"
+   }
+   ```
+4. Ejecuta los tests:
+   ```bash
+   npm run test
+   ```
+
+Puedes consultar la documentación de [Vitest](https://vitest.dev/) o [React Testing Library](https://testing-library.com/docs/) para más detalles.
 
 # Cineplanet Reto Frontend
 
@@ -7,7 +31,7 @@ Aplicación web de compra de entradas y dulcería para Cineplanet, desarrollada 
 
 1. **Clona el repositorio:**
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/BenyaOps/retoFrontendCP.git
    cd cp-reto-frontend
    ```
 2. **Instala dependencias:**
@@ -83,5 +107,3 @@ cp-reto-frontend/
 - Para autenticación real, configura tus credenciales de Firebase en `src/api/firebase.ts`.
 - Los estilos siguen la paleta y branding de Cineplanet.
 
----
-Desarrollado con ❤️ para el reto Cineplanet.
