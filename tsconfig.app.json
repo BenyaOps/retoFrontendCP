@@ -7,6 +7,7 @@
       "@/types": ["types/index.ts"],
       "@/components/ui/Button": ["components/ui/Button.tsx"],
       "@/api/services": ["api/services.ts"],
+      "@/api/auth": ["api/auth.ts"],
       "@/router": ["router/index.ts"],
       "@/pages/*": ["pages/*"],
       "@/components/*": ["components/*"]

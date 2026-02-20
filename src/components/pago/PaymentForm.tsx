@@ -2,16 +2,16 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { CreditCard, ShieldCheck } from 'lucide-react';
-import { useStore } from '@/store';
+import { useUserStore } from '@/store';
 
 const paymentSchema = z.object({
-  cardNumber: z.string().length(16, "La tarjeta debe tener 16 dígitos"), // 
-  expiry: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "Formato MM/YY"), // [cite: 43]
-  cvv: z.string().min(3).max(4), // [cite: 44]
-  email: z.string().email("Correo inválido"), // [cite: 45]
-  name: z.string().min(3, "Nombre completo requerido"), // [cite: 46]
-  docType: z.enum(["DNI", "CE"]), // [cite: 49]
-  docNumber: z.string().min(8, "Número de documento inválido"), // [cite: 49]
+  cardNumber: z.string().length(16, "La tarjeta debe tener 16 dígitos"),
+  expiry: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "Formato MM/YY"),
+  cvv: z.string().min(3, "CVV debe tener al menos 3 dígitos").max(4, "CVV debe tener entre 3 y 4 dígitos"), 
+  email: z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Correo electrónico inválido"),
+  name: z.string().min(3, "Nombre completo requerido"), 
+  docType: z.enum(["DNI", "CE"]),
+  docNumber: z.string().min(8, "Número de documento inválido"),
 });
 
 type PaymentValues = z.infer<typeof paymentSchema>;
@@ -22,7 +22,7 @@ interface PaymentFormProps {
 }
 
 export const PaymentForm = ({ onSubmit, isProcessing }: PaymentFormProps) => {
-  const user = useStore((state) => state.user);
+  const user = useUserStore((state) => state.user);
   
   const { register, handleSubmit, formState: { errors } } = useForm<PaymentValues>({
     resolver: zodResolver(paymentSchema),
@@ -57,9 +57,16 @@ export const PaymentForm = ({ onSubmit, isProcessing }: PaymentFormProps) => {
           </div>
         </div>
 
-        <input {...register('name')} placeholder="Nombre completo" className="w-full bg-dark-900 border border-dark-500 rounded-xl px-4 py-3 text-white focus:border-brand-500 outline-none transition-all" />
-        <input {...register('email')} placeholder="Correo electrónico" className="w-full bg-dark-900 border border-dark-500 rounded-xl px-4 py-3 text-white focus:border-brand-500 outline-none transition-all" />
+        <div className="space-y-1">
+          <input {...register('name')} placeholder="Nombre completo" className="w-full bg-dark-900 border border-dark-500 rounded-xl px-4 py-3 text-white focus:border-brand-500 outline-none transition-all" />
+          {errors.name && <p className="text-red-500 text-[10px] font-bold uppercase ml-1">{errors.name.message}</p>}
+        </div>
 
+        <div className="space-y-1">
+            <input {...register('email')} placeholder="Correo electrónico" className="w-full bg-dark-900 border border-dark-500 rounded-xl px-4 py-3 text-white focus:border-brand-500 outline-none transition-all" />
+          {errors.email && <p className="text-red-500 text-[10px] font-bold uppercase ml-1">{errors.email.message}</p>}
+        </div>
+        
         <div className="flex gap-4">
           <select {...register('docType')} className="w-1/3 bg-dark-900 border border-dark-500 rounded-xl px-2 py-3 text-white focus:border-brand-500 outline-none appearance-none">
             <option value="DNI">DNI</option>
@@ -74,7 +81,7 @@ export const PaymentForm = ({ onSubmit, isProcessing }: PaymentFormProps) => {
 
       <button type="submit" disabled={isProcessing} className="w-full flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-500 disabled:bg-dark-700 text-white font-black py-4 rounded-2xl transition-all shadow-lg shadow-brand-600/20 uppercase tracking-widest text-sm active:scale-95">
         <ShieldCheck size={20} />
-        {isProcessing ? 'PROCESANDO PAGO...' : 'FINALIZAR TRANSACCIÓN'}
+        {isProcessing ? 'PROCESANDO PAGO...' : 'PAGAR AHORA'}
       </button>
     </form>
   );

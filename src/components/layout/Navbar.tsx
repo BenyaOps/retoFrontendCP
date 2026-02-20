@@ -5,11 +5,12 @@ import { useUserStore, useCartStore } from '@/store'
 
 export const Navbar = () => {
   const { user, clearUser } = useUserStore()
-  const { itemCount } = useCartStore()
+  const { itemCount, clearCart } = useCartStore()
   const navigate = useNavigate()
 
   const handleLogout = () => {
     clearUser()
+    clearCart()
     navigate('/')
   }
 

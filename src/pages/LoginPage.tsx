@@ -1,117 +1,124 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom' // 1. Corregido a react-router-dom
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { LogIn, UserCircle2 } from 'lucide-react'
-import { useStore } from '@/store'
+import { useUserStore } from '@/store'
+import { authService } from '@/api/auth'
 import { WelcomeModal } from '@/components/auth/WelcomeModal'
 
-// Esquema de validación para cumplir con el requerimiento 
 const loginSchema = z.object({
-  email: z.string().email('Ingresa un correo de Google válido'),
-  password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
+  email: z.string().email('Ingresa un correo válido'),
+  password: z.string().min(6, 'Mínimo 6 caracteres'),
 })
 
 type LoginFormValues = z.infer<typeof loginSchema>
 
 export const LoginPage = () => {
   const navigate = useNavigate()
-  const setUser = useStore((state) => state.setUser)
+  const setUser = useUserStore((state) => state.setUser)
   const [showWelcome, setShowWelcome] = useState(false)
   const [tempName, setTempName] = useState('')
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false)
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
   })
 
-  // Manejo de Login con Google [cite: 26, 27]
-  const onGoogleLogin = (data: LoginFormValues) => {
-    const nameFromEmail = data.email.split('@')[0]
-    const capitalizedName = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1)
+  // Login tradicional (Email/Password)
+  const onEmailLogin = (data: LoginFormValues) => {
+    const name = data.email.split('@')[0]
+    const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
     
-    // Guardamos los datos para usarlos en la pantalla de Pago 
-    setUser({
-      name: capitalizedName,
-      email: data.email,
-      isGuest: false,
-    })
-    
+    setUser({ name: capitalizedName, email: data.email, isGuest: false })
     setTempName(capitalizedName)
-    setShowWelcome(true) // Activamos el pop-up de bienvenida 
+    setShowWelcome(true)
   }
 
-  // Manejo de ingreso como Invitado 
-  const handleGuestEntry = () => {
-    setUser({
-      name: 'Invitado',
-      email: '',
-      isGuest: true,
-    })
-    navigate('/dulceria')
+  // Login real con Firebase Google
+  const handleGoogleSignIn = async () => {
+    setIsGoogleLoading(true)
+    try {
+      const userData = await authService.loginWithGoogle()
+      setUser(userData)
+      setTempName(userData.name)
+      setShowWelcome(true)
+    } catch (error) {
+      console.error(error)
+      alert("Error al conectar con Google")
+    } finally {
+      setIsGoogleLoading(false)
+    }
   }
+
+  const handleGuestEntry = () => {
+  // 1. Seteamos el estado global como invitado
+  setUser({
+    name: 'Invitado',
+    email: '',
+    isGuest: true, // Flag importante para la lógica de Pago
+  });
+
+  // 2. Navegación directa a la Dulcería
+  navigate('/dulceria');
+};
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md bg-dark-800 border border-dark-600 rounded-3xl p-8 shadow-2xl">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-600/10 text-brand-500 mb-4">
-            <LogIn size={32} />
-          </div>
-          <h1 className="text-3xl font-black text-white uppercase tracking-tight">Iniciar Sesión</h1>
-          <p className="text-gray-500 text-sm mt-2 font-medium">Elige tu forma de ingreso para comprar</p>
+          <h1 className="text-3xl font-black text-white uppercase">Iniciar Sesión</h1>
         </div>
 
-        <form onSubmit={handleSubmit(onGoogleLogin)} className="space-y-5">
-          <div className="space-y-1">
-            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Correo de Google</label>
-            <input
-              {...register('email')}
-              type="email"
-              placeholder="ejemplo@gmail.com"
-              className="w-full bg-dark-900 border border-dark-500 rounded-xl px-4 py-3 text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all"
-            />
-            {errors.email && <p className="text-red-500 text-xs font-medium ml-1">{errors.email.message}</p>}
-          </div>
+        {/* Formulario Tradicional */}
+        <form onSubmit={handleSubmit(onEmailLogin)} className="space-y-4">
+          <input {...register('email')} placeholder="Correo" className="form-input" />
+          {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
+          
+          <input {...register('password')} type="password" placeholder="Contraseña" className="form-input" />
+          {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
 
-          <div className="space-y-1">
-            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Contraseña</label>
-            <input
-              {...register('password')}
-              type="password"
-              placeholder="••••••••"
-              className="w-full bg-dark-900 border border-dark-500 rounded-xl px-4 py-3 text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all"
-            />
-            {errors.password && <p className="text-red-500 text-xs font-medium ml-1">{errors.password.message}</p>}
-          </div>
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-brand-600 hover:bg-brand-500 disabled:bg-brand-800 text-white font-black py-4 rounded-xl transition-all shadow-lg shadow-brand-600/20 active:scale-[0.98]"
-          >
-            {isSubmitting ? 'VERIFICANDO...' : 'INGRESAR CON GOOGLE'}
+          <button type="submit" disabled={isSubmitting} className="btn-primary w-full btn-submit">
+            {isSubmitting ? 'ENTRANDO...' : 'INGRESAR'}
           </button>
         </form>
 
-        <div className="relative my-8">
-          <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-dark-600"></span></div>
-          <div className="relative flex justify-center text-xs uppercase"><span className="px-4 bg-dark-800 text-gray-500 font-bold">O continúa como</span></div>
+        <div className="relative my-6 text-center">
+          <span className="bg-dark-800 px-2 text-xs text-gray-500 uppercase font-bold">o accede con</span>
         </div>
 
+        {/* Botón de Google Corregido */}
         <button
-          onClick={handleGuestEntry}
-          className="w-full flex items-center justify-center gap-2 bg-dark-700 hover:bg-dark-600 text-gray-300 font-bold py-4 rounded-xl border border-dark-500 transition-all active:scale-[0.98]"
+          type="button"
+          disabled={isGoogleLoading}
+          onClick={handleGoogleSignIn}
+          className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-dark-950 font-black py-4 rounded-xl transition-all shadow-lg active:scale-95"
         >
-          <UserCircle2 size={20} />
-          INVITADO
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className="w-5" />
+          {isGoogleLoading ? 'CONECTANDO...' : 'INGRESAR CON GOOGLE'}
         </button>
+
+        <button
+  type="button"
+  onClick={handleGuestEntry}
+  className="w-full flex items-center justify-center gap-2 py-4 rounded-xl 
+             border border-dark-600 bg-dark-700/50 text-gray-400 font-bold 
+             hover:bg-dark-700 hover:text-white hover:border-brand-500/50 
+             transition-all duration-300 active:scale-[0.98] group"
+>
+  <UserCircle2 size={20} className="group-hover:text-brand-500 transition-colors" />
+  CONTINUAR COMO INVITADO
+</button>
       </div>
 
       {showWelcome && (
         <WelcomeModal 
           name={tempName} 
-          onConfirm={() => navigate('/dulceria')} 
+          onConfirm={() => {
+            console.log("Navegando a dulcería..."); // Debug
+            navigate('/dulceria');
+          }} 
         />
       )}
     </div>

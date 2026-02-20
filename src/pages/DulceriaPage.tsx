@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { Plus, Minus, Trash2, ShoppingCart, ArrowRight } from 'lucide-react'
 import { getCandyStore } from '@/api/services'
 import { useCartStore, useUserStore } from '@/store'
