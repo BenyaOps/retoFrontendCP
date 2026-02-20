@@ -8,7 +8,8 @@
       "@/api/services": ["api/services.ts"],
       "@/router": ["router/index.ts"],
       "@/pages/*": ["pages/*"],
-      "@/components/*": ["components/*"]
+      "@/components/*": ["components/*"],
+      "@/components/auth/*": ["components/auth/*"]
     }
   },
   "references": [

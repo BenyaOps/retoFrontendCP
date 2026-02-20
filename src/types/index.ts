@@ -30,6 +30,15 @@ export interface CandyProduct {
   category: 'snack' | 'drink' | 'combo'
 }
 
+export interface Product {
+  id: string
+  name: string
+  description: string
+  price: number
+  imageUrl: string
+  category: 'snack' | 'drink' | 'combo'
+}
+
 export interface CandyStoreResponse {
   data: CandyProduct[]
 }
@@ -81,4 +90,14 @@ export interface CompletePayload {
 export interface CompleteResponse {
   code: string
   message: string
+}
+
+export interface Movie {
+  id: string
+  title: string
+  description: string
+  genre: string
+  duration: string
+  rating: string
+  imageUrl: string
 }
