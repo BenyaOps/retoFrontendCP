@@ -24,7 +24,7 @@ export const WelcomeModal = ({ name, onConfirm }: WelcomeModalProps) => {
           onClick={onConfirm}
           className="w-full bg-brand-600 hover:bg-brand-500 text-white font-black py-4 rounded-xl transition-all shadow-lg shadow-brand-600/20 uppercase tracking-widest"
         >
-          Aceptar y continuar
+          Aceptar
         </button>
       </div>
     </div>

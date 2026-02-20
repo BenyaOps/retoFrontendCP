@@ -78,6 +78,30 @@ export interface PayUResponse {
   }
 }
 
+export interface PayURequest {
+  cardNumber: string
+  expirationDate: string
+  cvv: string
+  amount: number
+  currency: string
+  description: string
+  buyer: {
+    email: string
+    fullName: string
+    dniNumber: string
+  }
+}
+
+export interface formDataPayment {
+  cardNumber: string
+  expirationDate: string
+  cvv: string
+  email: string
+  name: string
+  documentType: DocumentType
+  documentNumber: string
+}
+
 // ─── Complete Transaction ─────────────────────────────────────────────────────
 export interface CompletePayload {
   email: string

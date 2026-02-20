@@ -1,73 +1,87 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Cineplanet Reto Frontend
 
-Currently, two official plugins are available:
+Aplicación web de compra de entradas y dulcería para Cineplanet, desarrollada con React, TypeScript y Vite.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Get Started
 
-## React Compiler
+1. **Clona el repositorio:**
+   ```bash
+   git clone <repo-url>
+   cd cp-reto-frontend
+   ```
+2. **Instala dependencias:**
+   ```bash
+   npm install
+   ```
+3. **Inicia el servidor de desarrollo:**
+   ```bash
+   npm run dev
+   ```
+4. Accede a `http://localhost:5173` en tu navegador.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## 📁 Estructura de archivos principal
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+cp-reto-frontend/
+├── public/
+│   └── mockServiceWorker.js
+├── src/
+│   ├── api/                # Servicios de autenticación, API y Firebase
+│   ├── assets/             # Imágenes y recursos estáticos
+│   ├── components/         # Componentes reutilizables y de UI
+│   ├── mocks/              # Mock Service Worker para desarrollo
+│   ├── pages/              # Páginas principales de la app
+│   ├── router/             # Definición de rutas
+│   ├── store/              # Zustand stores (usuario, carrito)
+│   ├── types/              # Tipos y modelos TypeScript
+│   ├── App.tsx             # Componente raíz
+│   ├── main.tsx            # Punto de entrada
+│   └── index.css           # Estilos globales
+├── package.json
+├── vite.config.ts
+└── ...
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🧩 Librerías principales
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Librería | Propósito |
+|----------|-----------|
+| **React** | UI y componentes |
+| **Vite** | Bundler y servidor de desarrollo |
+| **TypeScript** | Tipado estático |
+| **Zustand** | Manejo de estado global (usuario, carrito) |
+| **React Router DOM** | Ruteo de páginas |
+| **TailwindCSS** | Utilidades de estilos |
+| **Axios** | Peticiones HTTP |
+| **Firebase** | Autenticación con Google |
+| **MSW** | Mock de APIs para desarrollo |
+| **Lucide React** | Iconos SVG |
+| **React Hook Form + Zod** | Formularios y validación |
+
+
+## 📝 Descripción de carpetas y archivos clave
+
+- **src/pages/**: Páginas principales (Home, Login, Dulcería, Pago, Confirmación, 404).
+- **src/components/**: Componentes de UI, layout, pago, autenticación, etc.
+- **src/api/**: Lógica de autenticación, servicios de negocio y configuración de Firebase.
+- **src/store/**: Estado global con Zustand (usuario, carrito).
+- **src/mocks/**: Handlers y configuración de MSW para simular APIs.
+- **src/types/**: Tipos TypeScript para usuarios, productos, pagos, etc.
+
+## 🛠️ Scripts útiles
+
+- `npm run dev` — Inicia el servidor de desarrollo.
+- `npm run build` — Compila la app para producción.
+- `npm run preview` — Previsualiza la build de producción.
+- `npm run lint` — Linting del código fuente.
+
+## 💡 Notas
+
+- El proyecto está preparado para desarrollo local con mocks de API (MSW).
+- Para autenticación real, configura tus credenciales de Firebase en `src/api/firebase.ts`.
+- Los estilos siguen la paleta y branding de Cineplanet.
+
+---
+Desarrollado con ❤️ para el reto Cineplanet.

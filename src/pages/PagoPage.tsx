@@ -5,6 +5,7 @@ import { PaymentForm } from '@/components/pago/PaymentForm';
 import { payuService, cinemaApi } from '@/api/services';
 import { useCartStore } from '@/store';
 import { PaymentSuccessModal } from '@/components/pago/PaymentSuccessModal';
+import { ItemsVacio } from '@/components/pagos/itemsVacio';
 
 export const PagoPage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -13,9 +14,13 @@ export const PagoPage = () => {
   const clearCart = useCartStore((state) => state.clearCart);
   const navigate = useNavigate();
 
+  const { items } = useCartStore();
+
   const handleProcessPayment = async (formData: any) => {
     setIsProcessing(true);
     try {
+      console.log({formData});
+      
       // 1. Confirmación del servicio de PayU
       const payuRes = await payuService.processPayment(formData); 
 
@@ -33,8 +38,8 @@ export const PagoPage = () => {
         console.log({payuRes});
         
         setSuccessData({ id: payuRes.transactionId, date: payuRes.operationDate });
-        clearCart();
         setShowSuccess(true);
+        clearCart();
       }
     } catch (error) {
       alert("Error en el procesamiento del pago.");
@@ -48,6 +53,10 @@ export const PagoPage = () => {
     setShowSuccess(false);
     navigate('/');
   };
+
+  if (items.length === 0 && !showSuccess) {
+    return <ItemsVacio />;
+  }
 
   return (
     <>

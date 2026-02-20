@@ -17,7 +17,7 @@ const PREMIERES_MOCK: PremieresResponse = {
         'Deadpool y Wolverine unen fuerzas en una aventura que cambiará el multiverso para siempre. La película más esperada del año con Hugh Jackman y Ryan Reynolds.',
       genre: 'Acción / Comedia',
       duration: '127 min',
-      rating: 'M18',
+      rating: '+18',
     },
     {
       id: '2',
@@ -37,7 +37,7 @@ const PREMIERES_MOCK: PremieresResponse = {
         'El origen de la invasión alienígena que dejó al mundo en silencio. Una nueva historia de supervivencia en la ciudad de Nueva York.',
       genre: 'Terror / Ciencia Ficción',
       duration: '99 min',
-      rating: 'M14',
+      rating: '+14',
     },
     {
       id: '4',
@@ -67,7 +67,7 @@ const PREMIERES_MOCK: PremieresResponse = {
         'La historia continúa décadas después del original. Un nuevo héroe debe luchar en el Coliseo Romano para salvar el Imperio.',
       genre: 'Acción / Drama',
       duration: '148 min',
-      rating: 'M14',
+      rating: '+14',
     },
   ],
 }
