@@ -2,6 +2,11 @@
 
 Aplicación web de compra de entradas y dulcería para Cineplanet, desarrollada con React, TypeScript y Vite. Con modulos de logueo y compra.
 
+## Pre-requisitos
+
+- npm >11
+- node >24
+
 ## 🚀 Get Started
 
 1. **Clona el repositorio:**
@@ -76,6 +81,22 @@ cp-reto-frontend/
 - `npm run preview` — Previsualiza la build de producción.
 - `npm run lint` — Linting del código fuente.
 `npm run test` — Corre las pruebas automatizadas
+
+## SIMULAR MSW PARA EL SERVICE WORKER
+
+Luego de ejecutar el comando
+
+``` bash
+npm install
+```
+
+Ejecuta el comando
+
+``` bash
+npx vitest
+```
+
+Es importante para simular el service worker dentro de la app de React.
 
 ## 🧪 Test
 
