@@ -1,6 +1,6 @@
 # Cineplanet Reto Frontend
 
-Aplicación web de compra de entradas y dulcería para Cineplanet, desarrollada con React, TypeScript y Vite.
+Aplicación web de compra de entradas y dulcería para Cineplanet, desarrollada con React, TypeScript y Vite. Con modulos de logueo y compra.
 
 ## 🚀 Get Started
 
