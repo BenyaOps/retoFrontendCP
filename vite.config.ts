@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/cp-reto-frontend/',
+  base: '/dist',
   resolve: {
     alias: {
       // 2. Definir el alias para que coincida con tu tsconfig
