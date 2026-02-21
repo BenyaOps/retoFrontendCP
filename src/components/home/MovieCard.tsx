@@ -21,7 +21,7 @@ export const MovieCard = ({ premiere, index }: MovieCardProps) => {
       onClick={handleAction}
       onKeyDown={(e) => e.key === 'Enter' && handleAction()}
     >
-      {/* Imagen — Lado Izquierdo [cite: 24] */}
+      {/* Imagen — Lado Izquierdo*/}
       <div className="sm:w-48 lg:w-56 shrink-0 overflow-hidden relative">
         <img
           src={premiere.imageUrl}
@@ -36,7 +36,7 @@ export const MovieCard = ({ premiere, index }: MovieCardProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-dark-800/80 to-transparent sm:hidden" />
       </div>
 
-      {/* Texto — Lado Derecho [cite: 24] */}
+      {/* Texto — Lado Derecho */}
       <div className="flex flex-col justify-between p-6 flex-1">
         <div>
           <div className="flex flex-wrap items-center gap-2 mb-3">

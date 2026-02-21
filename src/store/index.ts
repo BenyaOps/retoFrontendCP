@@ -151,7 +151,7 @@ export const useStore = create<StoreState>()(
 
       clearCart: () => set({ cart: [] }),
 
-      // Cálculo del total para mostrar en Dulcería y Pago [cite: 37]
+      // Cálculo del total para mostrar en Dulcería y Pago
       getTotalAmount: () => {
         return get().cart.reduce(
           (total, item) => total + item.product.price * item.quantity,

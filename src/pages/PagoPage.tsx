@@ -23,7 +23,7 @@ export const PagoPage = () => {
       
       // 1. Confirmación del servicio de PayU
       const payuRes = await payuService.processPayment(formData); 
-
+      console.log({payuRes});
       // 2. Servicio 'complete' para terminar la transacción 
       const res = await cinemaApi.completeTransaction({
         email: formData.email,

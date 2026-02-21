@@ -19,19 +19,19 @@ const router = createBrowserRouter([
     errorElement: <NotFoundPage />, // Manejo de errores 404 integrado
     children: [
       {
-        index: true, // Ruta por defecto: Home [cite: 14, 69]
+        index: true, // Ruta por defecto
         element: <HomePage />,
       },
       {
-        path: 'login', // Pantalla de Login [cite: 16, 72]
+        path: 'login', // Pantalla de Login 
         element: <LoginPage />,
       },
       {
-        path: 'dulceria', // Pantalla de Dulcería [cite: 32, 71]
+        path: 'dulceria', // Pantalla de Dulcería 
         element: <DulceriaPage />,
       },
       {
-        path: 'pago', // Pantalla de Pago [cite: 39]
+        path: 'pago', // Pantalla de Pago 
         element: <PagoPage />,
       },
       {

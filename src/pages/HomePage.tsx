@@ -48,11 +48,11 @@ export const HomePage = () => {
           Estrenos <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-brand-600">Exclusivos</span>
         </h1>
         <p className="text-gray-500 mt-4 text-base max-w-xl font-medium">
-          Selecciona una película para comenzar tu proceso de compra[cite: 22].
+          Selecciona una película para comenzar tu proceso de compra.
         </p>
       </header>
 
-      {/* Premiere list [cite: 13, 14, 23, 24] */}
+      {/* Premiere list */}
       <div className="flex flex-col gap-8">
         {premieres.map((premiere, idx) => (
           <MovieCard 

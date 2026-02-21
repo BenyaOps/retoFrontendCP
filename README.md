@@ -121,11 +121,9 @@ Para agregar y ejecutar tests:
    npm run test
    ```
 
-Puedes consultar la documentación de [Vitest](https://vitest.dev/) o [React Testing Library](https://testing-library.com/docs/) para más detalles.
 
 ## 💡 Notas
 
 - El proyecto está preparado para desarrollo local con mocks de API (MSW).
 - Para autenticación real, configura tus credenciales de Firebase en `src/api/firebase.ts`.
-- Los estilos siguen la paleta y branding de Cineplanet.
 

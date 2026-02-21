@@ -12,7 +12,7 @@ import type {
 
 // Configuración base de Axios
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: import.meta.env.VITE_API_URL || 'https://o43w8mr1b9.execute-api.us-east-1.amazonaws.com/dev/api',
   headers: { 'Content-Type': 'application/json' }
 });
 

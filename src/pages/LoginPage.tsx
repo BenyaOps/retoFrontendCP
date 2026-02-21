@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom' // 1. Corregido a react-router-dom
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -70,7 +70,6 @@ export const LoginPage = () => {
     isGuest: true, // Flag importante para la lógica de Pago
   });
 
-  // 2. Navegación directa a la Dulcería
   navigate('/dulceria');
 };
 
