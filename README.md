@@ -24,6 +24,13 @@ Aplicación web de compra de entradas y dulcería para Cineplanet, desarrollada 
    ```
 4. Accede a `http://localhost:5173` en tu navegador.
 
+## Funcionalidades
+
+- Consumo de endpoints de API.
+- Sign in de Google usando Firebase.
+- Estadp global en el manteniimiento de productos.
+- Validaciones de formularios de Pago.
+
 ## 📁 Estructura de archivos principal
 
 ```
