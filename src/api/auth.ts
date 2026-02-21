@@ -21,5 +21,16 @@ export const authService = {
       console.error("Error en Firebase Login:", error);
       throw error;
     }
+  },
+
+  loginWithEmail: async (email: string, password: string): Promise<User> => {
+    // Para simplificar, este método simula un login exitoso con email/password
+    // En un caso real, aquí iría la lógica de autenticación con Firebase o backend propio
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    return {
+      name: email.split('@')[0],
+      email,
+      isGuest: false
+    };
   }
 };

@@ -36,7 +36,16 @@ export const Navbar = () => {
 
           {/* Nav Links */}
           <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map(({ to, label }) => (
+            {navLinks.map(({ to, label }) => {
+              if (to === '/login' && user) {
+                // Si el usuario ya está logueado, no mostramos el enlace de login
+                return null;
+              }
+              else if (to === '/dulceria' && !user) {
+                // Si el usuario no está logueado, no mostramos el enlace de dulcería
+                return null;
+              }
+              return (
               <NavLink
                 key={to}
                 to={to}
@@ -52,7 +61,8 @@ export const Navbar = () => {
               >
                 {label}
               </NavLink>
-            ))}
+            )
+            })}
           </nav>
 
           {/* Right side */}
@@ -101,7 +111,16 @@ export const Navbar = () => {
 
       {/* Mobile nav */}
       <div className="md:hidden border-t border-dark-700 px-4 py-2 flex gap-1">
-        {navLinks.map(({ to, label }) => (
+        {navLinks.map(({ to, label }) => {
+          if (to === '/login' && user) {
+            // Si el usuario ya está logueado, no mostramos el enlace de login
+            return null;
+          }
+          else if (to === '/dulceria' && !user) {
+            // Si el usuario no está logueado, no mostramos el enlace de dulcería
+            return null;
+          }
+              return (
           <NavLink
             key={to}
             to={to}
@@ -117,7 +136,9 @@ export const Navbar = () => {
           >
             {label}
           </NavLink>
-        ))}
+          )
+        }
+        )}
       </div>
     </header>
   )

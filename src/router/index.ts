@@ -15,30 +15,30 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    errorElement: <NotFoundPage />, // Manejo de errores 404 integrado
+    errorElement: <NotFoundPage />,
     children: [
       {
-        index: true, // Ruta por defecto: Home [cite: 14, 69]
+        index: true,
         element: <HomePage />,
       },
       {
-        path: 'login', // Pantalla de Login [cite: 16, 72]
+        path: 'login',
         element: <LoginPage />,
       },
       {
-        path: 'dulceria', // Pantalla de Dulcería [cite: 32, 71]
+        path: 'dulceria',
         element: <DulceriaPage />,
       },
       {
-        path: 'pago', // Pantalla de Pago [cite: 39]
+        path: 'pago',
         element: <PagoPage />,
       },
       {
-        path: 'confirmacion', // Pantalla de compra exitosa 
+        path: 'confirmacion',
         element: <ConfirmacionPage />,
       },
       {
-        path: '*', // Redirección para rutas no encontradas
+        path: '*',
         element: <Navigate to="/404" replace />,
       }
     ],

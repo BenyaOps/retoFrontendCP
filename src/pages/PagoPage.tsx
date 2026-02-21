@@ -26,9 +26,9 @@ export const PagoPage = () => {
 
       // 2. Servicio 'complete' para terminar la transacción 
       const res = await cinemaApi.completeTransaction({
-        email: formData.email, // [cite: 60]
-        nombres: formData.name, // [cite: 61]
-        dni: formData.docNumber, // [cite: 62]
+        email: formData.email,
+        nombres: formData.name, 
+        dni: formData.docNumber, 
         operationDate: payuRes.operationDate, 
         transactionId: payuRes.transactionId
       });

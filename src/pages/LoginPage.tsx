@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom' // 1. Corregido a react-router-dom
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { LogIn, UserCircle2 } from 'lucide-react'
+import { UserCircle2 } from 'lucide-react'
 import { useUserStore } from '@/store'
 import { authService } from '@/api/auth'
 import { WelcomeModal } from '@/components/auth/WelcomeModal'
@@ -18,6 +18,7 @@ type LoginFormValues = z.infer<typeof loginSchema>
 export const LoginPage = () => {
   const navigate = useNavigate()
   const setUser = useUserStore((state) => state.setUser)
+  const user = useUserStore((state) => state.user)
   const [showWelcome, setShowWelcome] = useState(false)
   const [tempName, setTempName] = useState('')
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
@@ -26,14 +27,23 @@ export const LoginPage = () => {
     resolver: zodResolver(loginSchema),
   })
 
+  // Validación de Usuario Logueado
+  useEffect(() => {
+    if (user) {
+      navigate('/dulceria', { replace: true });
+    }
+  }, [user, navigate]);
+
   // Login tradicional (Email/Password)
-  const onEmailLogin = (data: LoginFormValues) => {
-    const name = data.email.split('@')[0]
-    const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
-    
-    setUser({ name: capitalizedName, email: data.email, isGuest: false })
-    setTempName(capitalizedName)
-    setShowWelcome(true)
+  const onEmailLogin = async (data: LoginFormValues) => {
+    try {
+      const userData = await authService.loginWithEmail(data.email, data.password)
+      setUser(userData)
+      setTempName(userData.name)
+      setShowWelcome(true)
+    } catch (error) {
+      alert("Error al iniciar sesión con correo y contraseña")
+    }
   }
 
   // Login real con Firebase Google
@@ -93,7 +103,7 @@ export const LoginPage = () => {
           type="button"
           disabled={isGoogleLoading}
           onClick={handleGoogleSignIn}
-          className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-dark-950 font-black py-4 rounded-xl transition-all shadow-lg active:scale-95"
+          className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-dark-950 font-black py-4 rounded-xl transition-all shadow-lg active:scale-95 mb-4"
         >
           <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className="w-5" />
           {isGoogleLoading ? 'CONECTANDO...' : 'INGRESAR CON GOOGLE'}

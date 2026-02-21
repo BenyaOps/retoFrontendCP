@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import './index.css'
 
 import { Layout } from '@/components/layout/Layout'
 import { HomePage } from '@/pages/HomePage'
@@ -10,9 +9,9 @@ import { DulceriaPage } from '@/pages/DulceriaPage'
 import { PagoPage } from '@/pages/PagoPage'
 import { ConfirmacionPage } from '@/pages/ConfirmacionPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
-// 1. Asegúrate de que la ruta coincida con tu carpeta y archivo real:
-// Si el archivo es src/routes/AppRouter.tsx, cámbialo a '@/routes/AppRouter'
-//import { router } from '@/router' 
+
+import './index.css'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -52,7 +51,7 @@ const router = createBrowserRouter([
 ]);
 
 async function enableMocking() {
-  // Solo activamos MSW en desarrollo para este reto 
+  // Solo activamos MSW en enterno de desarrollo
   if (import.meta.env.PROD) {
     return;
   }

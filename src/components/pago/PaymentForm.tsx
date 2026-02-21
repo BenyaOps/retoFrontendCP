@@ -33,6 +33,15 @@ export const PaymentForm = ({ onSubmit, isProcessing }: PaymentFormProps) => {
     }
   });
 
+  const keyMMYY = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value.replace(/\D/g, '');
+              if (value.length >= 2) {
+                e.currentTarget.value = value.slice(0, 2) + '/' + value.slice(2, 4);
+              } else {
+                e.currentTarget.value = value;
+              }
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-dark-800 border border-dark-600 rounded-3xl p-8">
       <div className="flex items-center gap-3 mb-2">
@@ -48,11 +57,18 @@ export const PaymentForm = ({ onSubmit, isProcessing }: PaymentFormProps) => {
 
         <div className="flex gap-4">
           <div className="w-1/2 space-y-1">
-            <input {...register('expiry')} placeholder="MM/YY" className="w-full bg-dark-900 border border-dark-500 rounded-xl px-4 py-3 text-white focus:border-brand-500 outline-none transition-all" />
+            <input {...register('expiry')} 
+            placeholder="MM/YY" 
+             onKeyUp={(e) =>keyMMYY(e)} 
+            className="w-full bg-dark-900 border border-dark-500 rounded-xl px-4 py-3 text-white focus:border-brand-500 outline-none transition-all" />
             {errors.expiry && <p className="text-red-500 text-[10px] font-bold uppercase ml-1">{errors.expiry.message}</p>}
           </div>
           <div className="w-1/2 space-y-1">
-            <input {...register('cvv')} placeholder="CVV" className="w-full bg-dark-900 border border-dark-500 rounded-xl px-4 py-3 text-white focus:border-brand-500 outline-none transition-all" />
+            <input {...register('cvv')} 
+            placeholder="CVV" 
+            className="w-full bg-dark-900 border border-dark-500 rounded-xl px-4 py-3 text-white focus:border-brand-500 outline-none transition-all" 
+            />
+            
             {errors.cvv && <p className="text-red-500 text-[10px] font-bold uppercase ml-1">{errors.cvv.message}</p>}
           </div>
         </div>

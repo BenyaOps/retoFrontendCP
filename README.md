@@ -1,28 +1,3 @@
-## 🧪 Test
-
-Actualmente el proyecto no incluye pruebas automatizadas, pero puedes agregar tests usando Jest, React Testing Library o Vitest.
-
-Para agregar y ejecutar tests:
-
-1. Instala una librería de testing (ejemplo con Vitest):
-   ```bash
-   npm install --save-dev vitest @testing-library/react @testing-library/jest-dom
-   ```
-2. Crea archivos `*.test.tsx` o `*.spec.tsx` en la carpeta `src/`.
-3. Agrega un script en `package.json`:
-   ```json
-   "scripts": {
-     ...
-     "test": "vitest"
-   }
-   ```
-4. Ejecuta los tests:
-   ```bash
-   npm run test
-   ```
-
-Puedes consultar la documentación de [Vitest](https://vitest.dev/) o [React Testing Library](https://testing-library.com/docs/) para más detalles.
-
 # Cineplanet Reto Frontend
 
 Aplicación web de compra de entradas y dulcería para Cineplanet, desarrollada con React, TypeScript y Vite.
@@ -100,6 +75,32 @@ cp-reto-frontend/
 - `npm run build` — Compila la app para producción.
 - `npm run preview` — Previsualiza la build de producción.
 - `npm run lint` — Linting del código fuente.
+`npm run test` — Corre las pruebas automatizadas
+
+## 🧪 Test
+
+Actualmente el proyecto no incluye pruebas automatizadas, pero puedes agregar tests usando Jest, React Testing Library o Vitest.
+
+Para agregar y ejecutar tests:
+
+1. Instala una librería de testing (ejemplo con Vitest):
+   ```bash
+   npm install --save-dev vitest @testing-library/react @testing-library/jest-dom
+   ```
+2. Crea archivos `*.test.tsx` o `*.spec.tsx` en la carpeta `src/`.
+3. Agrega un script en `package.json`:
+   ```json
+   "scripts": {
+     ...
+     "test": "vitest"
+   }
+   ```
+4. Ejecuta los tests:
+   ```bash
+   npm run test
+   ```
+
+Puedes consultar la documentación de [Vitest](https://vitest.dev/) o [React Testing Library](https://testing-library.com/docs/) para más detalles.
 
 ## 💡 Notas
 
