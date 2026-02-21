@@ -1,7 +1,7 @@
 
 import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/store';
-import { Plus, Minus, Trash2, ShoppingCart, ArrowRight } from 'lucide-react'
+import {  ShoppingCart, ArrowRight } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
 export const Sidebar = () => {

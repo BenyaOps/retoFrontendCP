@@ -18,18 +18,22 @@ const api = axios.create({
 
 /**
  * Servicio de PayU Latam (Simulado/Real)
- * Requerimiento: Integración con API de pagos Perú [cite: 54-56]
+ * Requerimiento: Integración con API de pagos Perú
  */
 export const payuService = {
   processPayment: async (paymentData: any): Promise<PayUResponse> => {
-    // En una implementación real, aquí se llamaría al endpoint de PayU [cite: 54]
-    // Por requerimiento del reto, podemos simular el pago exitoso [cite: 79, 80]
+    // En una implementación real, aquí se llamaría al endpoint de PayU 
+    // Por requerimiento del reto, podemos simular el pago exitoso
+    console.log({paymentData});
+    
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     return {
-      // Valores requeridos para el servicio 'complete' posterior [cite: 63, 64]
+      // Valores requeridos para el servicio 'complete' posterior 
       operationDate: new Date().toISOString(),
-      transactionId: `PAYU-${Math.random().toString(36).substring(2, 11).toUpperCase()}`
+      transactionId: `PAYU-${Math.random().toString(36).substring(2, 11).toUpperCase()}`,
+      code: "0", // Código de éxito simulado
+      transactionalCode: "APPROVED"
     };
   }
 };

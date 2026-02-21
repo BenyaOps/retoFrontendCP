@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
-import { ItemsVacio } from '@/components/pagos/itemsVacio'
+import { ItemsVacio } from '@/components/pagos/ItemsVacio'
 
 describe('ItemsVacio', () => {
   it('renders the empty cart message and navigation button', () => {

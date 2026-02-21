@@ -120,27 +120,27 @@ export const useStore = create<StoreState>()(
       
       addToCart: (product) => {
         const cart = get().cart
-        const existingItem = cart.find((item) => item.id === product.id)
+        const existingItem = cart.find((item) => item.product.id === product.id)
 
         if (existingItem) {
           set({
             cart: cart.map((item) =>
-              item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+              item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
             ),
           })
         } else {
-          set({ cart: [...cart, { ...product, quantity: 1 }] })
+          set({ cart: [...cart, { ...product, quantity: 1 } as any] })
         }
       },
 
       removeFromCart: (productId) =>
-        set({ cart: get().cart.filter((item) => item.id !== productId) }),
+        set({ cart: get().cart.filter((item) => +item.product.id !== productId) }),
 
       updateQuantity: (productId, delta) => {
         const cart = get().cart
         set({
           cart: cart.map((item) => {
-            if (item.id === productId) {
+            if (+item.product.id === productId) {
               const newQty = Math.max(1, item.quantity + delta)
               return { ...item, quantity: newQty }
             }
@@ -154,7 +154,7 @@ export const useStore = create<StoreState>()(
       // Cálculo del total para mostrar en Dulcería y Pago [cite: 37]
       getTotalAmount: () => {
         return get().cart.reduce(
-          (total, item) => total + item.price * item.quantity,
+          (total, item) => total + item.product.price * item.quantity,
           0
         )
       },

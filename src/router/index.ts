@@ -1,5 +1,5 @@
-// Ejemplo de router para Vite + React Router
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+import React from 'react';
 
 import { Layout } from '@/components/layout/Layout'
 import { HomePage } from '@/pages/HomePage'
@@ -9,42 +9,40 @@ import { PagoPage } from '@/pages/PagoPage'
 import { ConfirmacionPage } from '@/pages/ConfirmacionPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 
-
-
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
-    errorElement: <NotFoundPage />,
+    element: React.createElement(Layout),
+    errorElement: React.createElement(NotFoundPage),
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: React.createElement(HomePage),
       },
       {
         path: 'login',
-        element: <LoginPage />,
+        element: React.createElement(LoginPage),
       },
       {
         path: 'dulceria',
-        element: <DulceriaPage />,
+        element: React.createElement(DulceriaPage),
       },
       {
         path: 'pago',
-        element: <PagoPage />,
+        element: React.createElement(PagoPage),
       },
       {
         path: 'confirmacion',
-        element: <ConfirmacionPage />,
+        element: React.createElement(ConfirmacionPage),
+      },
+      {
+        path: '404',
+        element: React.createElement(NotFoundPage),
       },
       {
         path: '*',
-        element: <Navigate to="/404" replace />,
+        element: React.createElement(Navigate, { to: '/404', replace: true }),
       }
     ],
-  },
-  {
-    path: '/404',
-    element: <NotFoundPage />,
   }
 ]);

@@ -14,9 +14,7 @@ export const MovieCard = ({ premiere, index }: MovieCardProps) => {
 
   return (
     <article
-      className="group flex flex-col sm:flex-row gap-0 rounded-2xl overflow-hidden border border-dark-600 
-                 hover:border-brand-600/50 transition-all duration-300 bg-dark-800 
-                 hover:bg-dark-700 animate-slide-up"
+      className="group flex flex-col sm:flex-row gap-0 rounded-2xl overflow-hidden border border-dark-600 hover:border-brand-600/50 transition-all duration-300 bg-dark-800 hover:bg-dark-700 animate-slide-up"
       style={{ animationDelay: `${index * 60}ms` }}
       role="button"
       tabIndex={0}

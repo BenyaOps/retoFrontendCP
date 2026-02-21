@@ -10,8 +10,8 @@ import { GridProducts } from '@/components/grid/GridProducts'
 export const DulceriaPage = () => {
   const navigate = useNavigate()
   const { user } = useUserStore()
-  const { items, addItem, decrementItem, removeItem } = useCartStore()
-
+  // const { items, addItem, decrementItem, removeItem } = useCartStore()
+  const { items } = useCartStore()
   const [products, setProducts] = useState<CandyProduct[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

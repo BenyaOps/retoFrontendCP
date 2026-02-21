@@ -65,8 +65,10 @@ export interface PaymentFormData {
 // ─── PayU (simulated) ─────────────────────────────────────────────────────────
 export interface PayUResponse {
   code: string
-  transactionalCode: string
-  transactionResponse: {
+  transactionalCode: string,
+  operationDate: string,
+  transactionId: string,
+  transactionResponse?: {
     orderId: number
     transactionId: string
     state: 'APPROVED' | 'DECLINED' | 'ERROR' | 'PENDING'

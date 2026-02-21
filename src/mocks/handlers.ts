@@ -145,6 +145,8 @@ const CANDY_STORE_MOCK: CandyStoreResponse = {
 const mockPayUResponse = (): PayUResponse => ({
   code: 'SUCCESS',
   transactionalCode: 'SUCCESS',
+  operationDate: new Date().toISOString(),
+  transactionId: crypto.randomUUID(),
   transactionResponse: {
     orderId: Math.floor(Math.random() * 9_000_000) + 1_000_000,
     transactionId: crypto.randomUUID(),

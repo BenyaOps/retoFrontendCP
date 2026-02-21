@@ -1,4 +1,4 @@
-import { useUserStore, useCartStore, useStore } from '@/store';
+import { useCartStore } from '@/store';
 
 export const OrderSummary = () => {
   const { items, total } = useCartStore();
