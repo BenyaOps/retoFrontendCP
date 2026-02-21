@@ -2,11 +2,7 @@ import axios from 'axios'
 
 export const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
-  timeout: 10_000,
-  headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*', 
-  },
+  timeout: 10_000
 })
 
 // Response interceptor for error handling
