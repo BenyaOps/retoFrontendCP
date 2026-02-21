@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  base: '/',
   resolve: {
     alias: {
       // 2. Definir el alias para que coincida con tu tsconfig
